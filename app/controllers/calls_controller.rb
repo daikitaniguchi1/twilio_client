@@ -1,6 +1,13 @@
 class CallsController < ApplicationController
   def index
-    # put your own credentials here
+    @call = Call.new
+  end
+
+  def create
+
+    @msg =  params[:call][:message]
+
+    #put your own credentials here
     account_sid = 'ACb024b692d223ccb5a8988cba4073e226'
     auth_token = '84d20c23c8d5496a9066668675362702'
 
@@ -13,6 +20,8 @@ class CallsController < ApplicationController
         # Fetch instructions from this URL when the call connects
         :url => 'http://twilio-call-client.herokuapp.com/calls/callback'
     )
+
+    render 'show'
   end
 
   def callback
@@ -20,7 +29,7 @@ class CallsController < ApplicationController
 
     render xml: xml.Response do
       xml.Gather(action: 'http://twilio-call-client.heroku.com/calls/receive', numDigits: 1, timeout: 10) do
-        xml.Say('番号を入力してください', voice: 'woman', language: 'ja-JP')
+        xml.Say(@msg, voice: 'woman', language: 'ja-JP')
       end
       xml.Say('何も入力されませんでした', voice: 'woman', language: 'ja-JP')
     end

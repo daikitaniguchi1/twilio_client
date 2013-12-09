@@ -1,2 +1,7 @@
-<h1>Calls#index</h1>
-<p>Find me in app/views/calls/index.html.erb</p>
+<h1>Call to Taniguchi</h1>
+<%= form_for(@call) do |f| %>
+  <%= f.label '谷口にひとこと' %>:
+  <%= f.text_field :message %>
+  <%= f.submit 'ok' %>
+<% end %>
+
