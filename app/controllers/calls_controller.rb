@@ -9,7 +9,7 @@ class CallsController < ApplicationController
 
     @call = @client.account.calls.create(
         :from => '+815031595958',   # From your Twilio number
-        :to => '+8108013316810',     # To any number
+        :to => '08013316810',     # To any number
         # Fetch instructions from this URL when the call connects
         :url => 'http://twilio-call-client.herokuapp.com/callback'
     )
