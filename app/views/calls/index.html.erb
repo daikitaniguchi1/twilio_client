@@ -1,9 +1,20 @@
 <h1>Call to Taniguchi</h1>
 <%= form_for(@call) do |f| %>
+
+  <% if @call.errors.any? %>
+    <div id="error_explanation">
+      <font color="red">空欄は駄目です！</font>
+    </div>
+    <br>
+  <% end %>
+
+
   <%= f.label 'お名前' %>:
+  <br>
   <%= f.text_field :to %>
   <br>
   <%= f.label '谷口にひとこと' %>:
+  <br>
   <%= f.text_field :message %>
   <br>
   <%= f.submit 'ok' %>
