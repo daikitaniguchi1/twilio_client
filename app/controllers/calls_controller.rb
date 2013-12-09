@@ -9,9 +9,9 @@ class CallsController < ApplicationController
 
     @call = @client.account.calls.create(
         :from => '+815031595958',   # From your Twilio number
-        :to => '08013316810',     # To any number
+        :to => '+818013316810',     # To any number
         # Fetch instructions from this URL when the call connects
-        :url => 'http://twilio-call-client.herokuapp.com/callback'
+        :url => 'http://twilio-call-client.herokuapp.com/calls/callback'
     )
   end
 
@@ -19,7 +19,7 @@ class CallsController < ApplicationController
     xml = Builder::XmlMarkup.new(indent: 2)
 
     render xml: xml.Response do
-      xml.Gather(action: 'http://twilio-call-client.heroku.com/receive', numDigits: 1, timeout: 10) do
+      xml.Gather(action: 'http://twilio-call-client.heroku.com/calls/receive', numDigits: 1, timeout: 10) do
         xml.Say('番号を入力してください', voice: 'woman', language: 'ja-JP')
       end
       xml.Say('何も入力されませんでした', voice: 'woman', language: 'ja-JP')
