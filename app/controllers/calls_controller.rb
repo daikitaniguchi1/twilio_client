@@ -29,9 +29,10 @@ class CallsController < ApplicationController
 
     render xml: xml.Response {
       xml.Gather(action: 'http://twilio-call-client.herokuapp.com/calls/receive', numDigits: 1, timeout: 10) do
-        xml.Say('番号を入力してください', voice: 'woman', language: 'ja-JP')
+        xml.Say(@msg, voice: 'woman', language: 'ja-JP')
+        #xml.Say('番号を入力してください', voice: 'woman', language: 'ja-JP')
       end
-      xml.Say(@msg, voice: 'woman', language: 'ja-JP')
+      xml.Say('何も入力されませんでした', voice: 'woman', language: 'ja-JP')
     }
     #respond_to do |format|
     #  format.xml  {render :xml => ''}
