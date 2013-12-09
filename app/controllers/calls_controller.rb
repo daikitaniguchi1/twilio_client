@@ -5,7 +5,9 @@ class CallsController < ApplicationController
 
   def create
 
-    @msg =  params[:call][:message]
+    @call = Call.new
+    @call.message =  params[:call][:message]
+    @call.save
 
     #put your own credentials here
     account_sid = 'ACb024b692d223ccb5a8988cba4073e226'
@@ -18,13 +20,16 @@ class CallsController < ApplicationController
         :from => '+815031595958',   # From your Twilio number
         :to => '+818013316810',     # To any number
         # Fetch instructions from this URL when the call connects
-        :url => 'http://twilio-call-client.herokuapp.com/calls/callback'
+        :url => "http://twilio-call-client.herokuapp.com/calls/callback"
     )
 
     render 'show'
   end
 
   def callback
+
+    @msg = Call.find(Call.count).message
+
     xml = Builder::XmlMarkup.new(indent: 2)
 
     render xml: xml.Response {
@@ -34,9 +39,6 @@ class CallsController < ApplicationController
       end
       xml.Say('何も入力されませんでした', voice: 'woman', language: 'ja-JP')
     }
-    #respond_to do |format|
-    #  format.xml  {render :xml => ''}
-    #end
   end
 
   def receive
