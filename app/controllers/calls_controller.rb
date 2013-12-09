@@ -7,6 +7,7 @@ class CallsController < ApplicationController
 
     @call = Call.new
     @call.message =  params[:call][:message]
+    @call.to =  params[:call][:to]
     @call.save
 
     @msg = params[:call][:message]
@@ -31,15 +32,16 @@ class CallsController < ApplicationController
   def callback
 
     @msg = Call.find(Call.count).message
+    @sender = Call.find(Call.count).to
 
     xml = Builder::XmlMarkup.new(indent: 2)
 
     render xml: xml.Response {
-      xml.Gather(action: 'http://twilio-call-client.herokuapp.com/calls/receive', numDigits: 1, timeout: 10) do
+      xml.Gather(action: 'http://twilio-call-client.herokuapp.com/calls/receive', numDigits: 1, timeout: 5) do
         xml.Say(@msg, voice: 'woman', language: 'ja-JP')
         #xml.Say('番号を入力してください', voice: 'woman', language: 'ja-JP')
       end
-      xml.Say('何も入力されませんでした', voice: 'woman', language: 'ja-JP')
+      xml.Say(@sender, voice: 'woman', language: 'ja-JP')
     }
   end
 

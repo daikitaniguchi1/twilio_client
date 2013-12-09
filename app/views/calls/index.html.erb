@@ -1,7 +1,11 @@
 <h1>Call to Taniguchi</h1>
 <%= form_for(@call) do |f| %>
+  <%= f.label 'お名前' %>:
+  <%= f.text_field :to %>
+  <br>
   <%= f.label '谷口にひとこと' %>:
   <%= f.text_field :message %>
+  <br>
   <%= f.submit 'ok' %>
 <% end %>
 
