@@ -11,6 +11,7 @@ class CallsController < ApplicationController
     @call.save
 
     @msg = params[:call][:message]
+    @sender = params[:call][:to]
 
     #put your own credentials here
     account_sid = 'ACb024b692d223ccb5a8988cba4073e226'
