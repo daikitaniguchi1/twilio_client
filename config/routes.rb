@@ -1,6 +1,8 @@
 TwilioClient::Application.routes.draw do
   get "/calls/callback" => "calls#callback"
+  post "/calls/callback" => "calls#callback"
   get "/calls/receive" => "calls#receive"
+  post "/calls/receive" => "calls#receive"
   resources :calls
 
   # The priority is based upon order of creation: first created -> highest priority.
