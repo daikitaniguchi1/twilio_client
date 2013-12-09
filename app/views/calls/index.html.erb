@@ -9,13 +9,14 @@
   <% end %>
 
 
+  <%= f.label '谷口に一言' %>:
+  <br>
+  <%= f.text_field :message %>
+  <br>
   <%= f.label 'お名前' %>:
   <br>
   <%= f.text_field :to %>
   <br>
-  <%= f.label '谷口にひとこと' %>:
-  <br>
-  <%= f.text_field :message %>
   <br>
   <%= f.submit 'ok' %>
 <% end %>
