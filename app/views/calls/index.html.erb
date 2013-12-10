@@ -1,34 +1,34 @@
 <fieldset>
 
   <legend>Call to Taniguchi </legend>
-<%= form_for(@call) do |f| %>
+  <%= form_for(@call) do |f| %>
 
-  <% if @call.errors.any? %>
-    <div id="error_explanation">
-      <font color="red">空欄は駄目です！</font>
+    <% if @call.errors.any? %>
+      <div id="error_explanation">
+        <font color="red">空欄は駄目です！</font>
+      </div>
+      <br>
+    <% end %>
+
+    <div class="control-group">
+
+      <%= f.label '谷口に一言' %>
+      <div class="controls">
+        <%= f.text_field :message %>
+      </div>
     </div>
-    <br>
+
+    <div class="control-group">
+      <%= f.label 'お名前' %>
+      <div class="controls">
+        <%= f.text_field :to %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit 'ok' , :class => "btn btn-primary" %>
+    </div>
+
   <% end %>
 
-  <div class="control-group">
-
-  <%= f.label '谷口に一言' %>
-    <div class="controls">
-  <%= f.text_field :message %>
-    </div>
-  </div>
-
-  <div class="control-group">
-  <%= f.label 'お名前' %>
-  <div class="controls">
-  <%= f.text_field :to %>
-  </div>
-  </div>
-
-  <div class="form-actions">
-  <%= f.submit 'ok' , :class => "btn btn-primary" %>
-  </div>
-
-<% end %>
-
-  </fieldset>
+</fieldset>
