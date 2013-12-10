@@ -1,4 +1,6 @@
-<h1>Call to Taniguchi</h1>
+<fieldset>
+
+  <legend>Call to Taniguchi </legend>
 <%= form_for(@call) do |f| %>
 
   <% if @call.errors.any? %>
@@ -8,15 +10,25 @@
     <br>
   <% end %>
 
+  <div class="control-group">
 
-  <%= f.label '谷口に一言' %>:
-  <br>
+  <%= f.label '谷口に一言' %>
+    <div class="controls">
   <%= f.text_field :message %>
-  <br>
-  <%= f.label 'お名前' %>:
-  <br>
+    </div>
+  </div>
+
+  <div class="control-group">
+  <%= f.label 'お名前' %>
+  <div class="controls">
   <%= f.text_field :to %>
-  <br>
-  <br>
-  <%= f.submit 'ok' %>
+  </div>
+  </div>
+
+  <div class="form-actions">
+  <%= f.submit 'ok' , :class => "btn btn-primary" %>
+  </div>
+
 <% end %>
+
+  </fieldset>
