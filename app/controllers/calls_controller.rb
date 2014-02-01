@@ -26,7 +26,7 @@ class CallsController < ApplicationController
 
   def params_check
     raise StandardError, 'Body is invalid' if params[:Body].nil?
-    raise StandardError, "Body isn't contain underscore" if params[:Body].include?("_")
+    raise StandardError, "Body isn't contain underscore" if !params[:Body].include?("_")
     raise StandardError, 'From is invalid' if params[:From].nil?
   end
 
