@@ -49,7 +49,7 @@ class CallsController < ApplicationController
                             'mobile_number' => @mobile_number
                         })
     p res.code
-    raise StandardError, 'error.' if res.code != 200
+    raise StandardError, 'error.' if res.code != "200"
   end
 
 
