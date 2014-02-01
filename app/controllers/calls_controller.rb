@@ -54,7 +54,7 @@ class CallsController < ApplicationController
 
   def get_reqest_url(media_id)
     # return Media.find(media_id).url
-    return 'http://twilio-call-client.herokuapp.com/authenticates/verify'
+    return 'http://pointbook.herokuapp.com/users/verify'
   end
 
 end
