@@ -37,9 +37,9 @@ class CallsController < ApplicationController
     @token = body[1]
     @mobile_number  = params[:From].sub(/^\+81/, '0')
 
-    raise StandardError, 'url is invalid' if url.nil?
-    raise StandardError, 'token is invalid' if token.nil?
-    raise StandardError, 'mobile_number is invalid' if mobile_number.nil?
+    raise StandardError, 'url is invalid' if @url.nil?
+    raise StandardError, 'token is invalid' if @token.nil?
+    raise StandardError, 'mobile_number is invalid' if @mobile_number.nil?
   end
 
   def request_api
