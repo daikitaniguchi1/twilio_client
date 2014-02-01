@@ -1,6 +1,11 @@
 class CallsController < ApplicationController
 
   def sms_verify
+    p 1111111
+    p params
+    p params[:Body]
+    p params[:From]
+
     body = params[:Body].split("_")
     media_id = body[0]
 
