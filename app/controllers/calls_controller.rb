@@ -1,7 +1,7 @@
 class CallsController < ApplicationController
   require 'net/http'
   require 'uri'
-  
+
   def sms_verify
 
     body = params[:Body].split("_")
@@ -48,9 +48,10 @@ class CallsController < ApplicationController
     raise StandardError, 'error.' if res.code != 200
   end
 
+
   def get_reqest_url(media_id)
     # return Media.find(media_id).url
-    return 'http://localhost:3000/authenticates/verify'
+    return 'http://twilio-call-client.herokuapp.com/authenticates/verify'
   end
 
 
