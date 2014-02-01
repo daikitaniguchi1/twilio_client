@@ -6,7 +6,7 @@ class CallsController < ApplicationController
 
     url = get_reqest_url(media_id)
     token = body[1]
-    mobile_number  = params[:From].sub(/¥+81/, from)
+    mobile_number  = params[:From].sub(/^\+81/, '0')
     begin
       api_post(url, token, mobile_number)
     rescue => e
