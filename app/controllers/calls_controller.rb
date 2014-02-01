@@ -48,6 +48,7 @@ class CallsController < ApplicationController
                             'auth_token' => @token,
                             'mobile_number' => @mobile_number
                         })
+    p res.code
     raise StandardError, 'error.' if res.code != 200
   end
 
