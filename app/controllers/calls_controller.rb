@@ -1,10 +1,6 @@
 class CallsController < ApplicationController
 
   def sms_verify
-    p 1111111
-    p params
-    p params[:Body]
-    p params[:From]
 
     body = params[:Body].split("_")
     media_id = body[0]
@@ -12,7 +8,13 @@ class CallsController < ApplicationController
     url = get_reqest_url(media_id)
     token = body[1]
     mobile_number  = params[:From].sub(/^\+81/, '0')
+
+    p url
+    p token
+    p mobile_number
+
     begin
+      params_check(url, token, mobile_number)
       api_post(url, token, mobile_number)
     rescue => e
       render :json => {
@@ -28,6 +30,13 @@ class CallsController < ApplicationController
   end
 
   private
+
+  def params_check(url, token, mobile_number)
+    raise StandardError, 'url is invalid' if url.nil?
+    raise StandardError, 'token is invalid' if token.nil?
+    raise StandardError, 'mobile_number is invalid' if mobile_number.nil?
+  end
+
   def api_post(url, token, mobile_number)
     res = Net::HTTP.post_form(URI.parse(url),
                         {
