@@ -1,12 +1,4 @@
 TwilioClient::Application.routes.draw do
-  get "/calls/callback" => "calls#callback"
-  post "/calls/callback" => "calls#callback"
-  get "/calls/receive" => "calls#receive"
-  post "/calls/receive" => "calls#receive"
-  post "/calls/create" => "calls#create"
-  post "/twilio" => "calls#sms_verify"
-
-  resources :calls
   resources :authenticates do
     collection do
       post 'verify'
