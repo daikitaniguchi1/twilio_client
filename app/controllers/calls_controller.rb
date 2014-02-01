@@ -6,7 +6,7 @@ class CallsController < ApplicationController
     begin
       params_check
       format_params
-      api_post
+      request_api
     rescue => e
       render :json => {
           code: 400,
@@ -42,7 +42,7 @@ class CallsController < ApplicationController
     raise StandardError, 'mobile_number is invalid' if mobile_number.nil?
   end
 
-  def api_post
+  def request_api
     res = Net::HTTP.post_form(URI.parse(@url),
                         {
                             'auth_token' => @token,
