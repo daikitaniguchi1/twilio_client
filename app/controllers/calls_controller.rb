@@ -33,7 +33,7 @@ class CallsController < ApplicationController
   def format_params
     body = params[:Body].split("_")
     @media_id = body[0]
-    @url = get_reqest_url(media_id)
+    @url = get_reqest_url(@media_id)
     @token = body[1]
     @mobile_number  = params[:From].sub(/^\+81/, '0')
 
