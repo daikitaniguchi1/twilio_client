@@ -7,15 +7,14 @@ class CallsController < ApplicationController
       params_check
       format_params
       request_api
+      logger.error("success!")
     rescue => e
       logger.error(
           "api_request_error: media_id #{@media_id} :#{e.message}"
       )
-      return
     ensure
-      puts "Hello, twilio!!"
+      return
     end
-    logger.error("success!")
   end
 
   private
