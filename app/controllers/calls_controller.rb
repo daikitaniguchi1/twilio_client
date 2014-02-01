@@ -8,12 +8,18 @@ class CallsController < ApplicationController
       format_params
       request_api
       logger.error("success!")
+      render :json => { code: 0 }
     rescue => e
       logger.error(
           "api_request_error: media_id #{@media_id} :#{e.message}"
       )
-    ensure
+      render :json => {
+          code: 400,
+          message: e.message
+      }
       return
+    ensure
+      puts "fin."
     end
   end
 
@@ -43,6 +49,7 @@ class CallsController < ApplicationController
                             'auth_token' => @token,
                             'mobile_number' => @mobile_number
                         })
+    p res.code
     raise StandardError, 'error.' if res.code != "200"
   end
 
