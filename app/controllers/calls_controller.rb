@@ -1,5 +1,7 @@
 class CallsController < ApplicationController
-
+  require 'net/http'
+  require 'uri'
+  
   def sms_verify
 
     body = params[:Body].split("_")
