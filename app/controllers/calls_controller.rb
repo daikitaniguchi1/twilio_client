@@ -3,27 +3,18 @@ class CallsController < ApplicationController
   require 'uri'
 
   def sms_verify
-
-    body = params[:Body].split("_")
-    media_id = body[0]
-
-    url = get_reqest_url(media_id)
-    token = body[1]
-    mobile_number  = params[:From].sub(/^\+81/, '0')
-
-    p url
-    p token
-    p mobile_number
-
     begin
-      params_check(url, token, mobile_number)
-      api_post(url, token, mobile_number)
+      params_check
+      format_params
+      api_post
     rescue => e
       render :json => {
           code: 400,
           message: e.message
       }
-      logger.error("api_request_error: media_id #{media_id} :#{e.message}")
+      logger.error(
+          "api_request_error: media_id #{media_id} :#{e.message}"
+      )
       return
     ensure
       puts "Hello, twilio!!"
@@ -33,17 +24,29 @@ class CallsController < ApplicationController
 
   private
 
-  def params_check(url, token, mobile_number)
+  def params_check
+    raise StandardError, 'Body is invalid' if params[:Body].nil?
+    raise StandardError, "Body isn't contain underscore" if params[:Body].include?("_")
+    raise StandardError, 'From is invalid' if params[:From].nil?
+  end
+
+  def format_params
+    body = params[:Body].split("_")
+    media_id = body[0]
+    @url = get_reqest_url(media_id)
+    @token = body[1]
+    @mobile_number  = params[:From].sub(/^\+81/, '0')
+
     raise StandardError, 'url is invalid' if url.nil?
     raise StandardError, 'token is invalid' if token.nil?
     raise StandardError, 'mobile_number is invalid' if mobile_number.nil?
   end
 
-  def api_post(url, token, mobile_number)
-    res = Net::HTTP.post_form(URI.parse(url),
+  def api_post
+    res = Net::HTTP.post_form(URI.parse(@url),
                         {
-                            'auth_token' => token,
-                            'mobile_number' => mobile_number
+                            'auth_token' => @token,
+                            'mobile_number' => @mobile_number
                         })
     raise StandardError, 'error.' if res.code != 200
   end
