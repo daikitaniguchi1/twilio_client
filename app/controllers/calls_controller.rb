@@ -3,6 +3,11 @@ class CallsController < ApplicationController
     @call = Call.new
   end
 
+  def sms_verify
+    puts "Hello, twilio!!"
+    render :json => {'code' => 0, 'message' => 'Hello, twilio!!'}
+  end
+
   def create
 
     @call = Call.new
