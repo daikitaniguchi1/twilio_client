@@ -4,9 +4,15 @@ TwilioClient::Application.routes.draw do
   get "/calls/receive" => "calls#receive"
   post "/calls/receive" => "calls#receive"
   post "/calls/create" => "calls#create"
-  resources :calls
-
   post "/twilio" => "calls#sms_verify"
+
+  resources :calls
+  resources :authenticates do
+    collection do
+      post 'verify'
+    end
+  end
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

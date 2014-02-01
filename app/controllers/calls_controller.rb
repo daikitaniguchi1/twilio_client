@@ -34,7 +34,7 @@ class CallsController < ApplicationController
 
   def get_reqest_url(media_id)
     # return Media.find(media_id).url
-    return 'http://localhost:3000/test'
+    return 'http://localhost:3000/authenticates/verify'
   end
 
 
