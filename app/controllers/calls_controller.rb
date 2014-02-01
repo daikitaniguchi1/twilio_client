@@ -26,9 +26,10 @@ class CallsController < ApplicationController
   private
 
   def params_check
-    raise StandardError, 'Body is invalid' if params[:Body].nil?
-    raise StandardError, "Body isn't contain underscore" if !params[:Body].include?("_")
-    raise StandardError, 'From is invalid' if params[:From].nil?
+    msg = 'Body is invalid' if params[:Body].nil?
+    msg = "Body isn't contain underscore" if !params[:Body].include?("_")
+    msg = 'From is invalid' if params[:From].nil?
+    raise StandardError, msg if !msg.nil?
   end
 
   def format_params
@@ -38,9 +39,10 @@ class CallsController < ApplicationController
     @token = body[1]
     @mobile_number  = params[:From].sub(/^\+81/, '0')
 
-    raise StandardError, 'url is invalid' if @url.nil?
-    raise StandardError, 'token is invalid' if @token.nil?
-    raise StandardError, 'mobile_number is invalid' if @mobile_number.nil?
+    msg = 'url is invalid' if @url.nil?
+    msg = 'token is invalid' if @token.nil?
+    msg = 'mobile_number is invalid' if @mobile_number.nil?
+    raise StandardError, msg if !msg.nil?
   end
 
   def request_api
@@ -49,7 +51,6 @@ class CallsController < ApplicationController
                             'auth_token' => @token,
                             'mobile_number' => @mobile_number
                         })
-    p res.code
     raise StandardError, 'error.' if res.code != "200"
   end
 
