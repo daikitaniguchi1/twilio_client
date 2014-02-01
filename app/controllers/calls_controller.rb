@@ -8,10 +8,6 @@ class CallsController < ApplicationController
       format_params
       request_api
     rescue => e
-      render :json => {
-          code: 400,
-          message: e.message
-      }
       logger.error(
           "api_request_error: media_id #{@media_id} :#{e.message}"
       )
@@ -19,7 +15,7 @@ class CallsController < ApplicationController
     ensure
       puts "Hello, twilio!!"
     end
-    render :json => {code: 0}
+    logger.error("success!")
   end
 
   private
@@ -48,7 +44,6 @@ class CallsController < ApplicationController
                             'auth_token' => @token,
                             'mobile_number' => @mobile_number
                         })
-    p res.code
     raise StandardError, 'error.' if res.code != "200"
   end
 
